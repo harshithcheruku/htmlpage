@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app>
+
+    <servlet>
+        <servlet-name>UpdateStudentServlet</servlet-name>
+        <servlet-class>UpdateStudentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateStudentServlet</servlet-name>
+        <url-pattern>/updateStudent</url-pattern>
+    </servlet-mapping>
+
+
+</web-app>

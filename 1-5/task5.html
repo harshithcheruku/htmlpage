@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Concepts</title>
+</head>
+<body>
+
+    <h2>JavaScript Concepts Demonstration</h2>
+    <pre id="output"></pre>
+
+    <script>
+        const output = document.getElementById("output");
+
+        function show(message) {
+            output.textContent += message + "\n";
+        }
+
+        // 1. Prototype Inheritance
+        function Person(name) {
+            this.name = name;
+        }
+
+        Person.prototype.display = function() {
+            return "Name: " + this.name;
+        };
+
+        function Student(name, course) {
+            Person.call(this, name);
+            this.course = course;
+        }
+
+        Student.prototype = Object.create(Person.prototype);
+        Student.prototype.constructor = Student;
+
+        Student.prototype.showCourse = function() {
+            return "Course: " + this.course;
+        };
+
+        let s = new Student("Rahul", "CSE");
+
+        show("1. Prototype Inheritance");
+        show(s.display());
+        show(s.showCourse());
+        show("");
+
+        // 2. Closure
+        function counter() {
+            let count = 0;
+
+            return function() {
+                count++;
+                return count;
+            };
+        }
+
+        let increment = counter();
+
+        show("2. Closure");
+        show("Count: " + increment());
+        show("Count: " + increment());
+        show("");
+
+        // 3. Callback
+        function calculate(a, b, callback) {
+            let sum = a + b;
+            callback(sum);
+        }
+
+        show("3. Callback");
+
+        calculate(10, 20, function(result) {
+            show("Sum: " + result);
+        });
+
+        show("");
+
+        // 4. Promise
+        function getData() {
+            return new Promise(function(resolve, reject) {
+                let success = true;
+
+                if (success) {
+                    resolve("Data received successfully");
+                } else {
+                    reject("Failed to receive data");
+                }
+            });
+        }
+
+        show("4. Promise");
+
+        getData()
+            .then(function(message) {
+                show(message);
+            })
+            .catch(function(error) {
+                show(error);
+            })
+            .finally(function() {
+                show("");
+            });
+
+        // 5. Async/Await
+        async function displayData() {
+            show("5. Async/Await");
+
+            try {
+                let message = await getData();
+                show(message);
+            } catch (error) {
+                show(error);
+            }
+        }
+
+        displayData();
+    </script>
+
+</body>
+</html>

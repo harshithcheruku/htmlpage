@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVR Bookstore - Form Validation</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #eef5f8;
+            color: #222;
+        }
+
+        header {
+            background: #a9def5;
+            text-align: center;
+            padding: 22px 10px;
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: #ffe3a3;
+            padding: 12px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #172554;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background: #172554;
+            color: white;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 25px auto;
+            padding: 0 15px;
+        }
+
+        .form-card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px #00000015;
+            border-top: 5px solid #2563eb;
+        }
+
+        .form-card h2 {
+            color: #172554;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 14px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        input:focus, textarea:focus {
+            outline: 2px solid #93c5fd;
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #172554;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: #c62828;
+        }
+
+        footer {
+            background: #172554;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        @media (max-width: 500px) {
+            .form-card {
+                padding: 18px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>CVR BOOKSTORE</h1>
+    <p>Vastunagar, Mangalpalli, Telangana</p>
+    <p>JavaScript Form Validation</p>
+</header>
+
+<nav>
+    <a href="#registration">Registration</a>
+    <a href="#login">Login</a>
+    <a href="#profile">User Profile</a>
+    <a href="#payment">Payment</a>
+</nav>
+
+<div class="container">
+
+    <!-- REGISTRATION FORM -->
+    <section class="form-card" id="registration">
+        <h2>User Registration</h2>
+
+        <form id="registrationForm">
+            <label>Full Name</label>
+            <input type="text" id="regName" placeholder="Enter full name">
+
+            <label>Email</label>
+            <input type="text" id="regEmail" placeholder="example@gmail.com">
+
+            <label>Mobile Number</label>
+            <input type="text" id="regMobile" maxlength="10"
+                   placeholder="10-digit mobile number">
+
+            <label>Username</label>
+            <input type="text" id="regUsername" placeholder="4 to 15 characters">
+
+            <label>Password</label>
+            <input type="password" id="regPassword" placeholder="Create password">
+
+            <label>Confirm Password</label>
+            <input type="password" id="regConfirm" placeholder="Re-enter password">
+
+            <button type="submit">Register</button>
+            <p class="message" id="regMessage"></p>
+        </form>
+    </section>
+
+    <!-- LOGIN FORM -->
+    <section class="form-card" id="login">
+        <h2>User Login</h2>
+
+        <form id="loginForm">
+            <label>Username</label>
+            <input type="text" id="loginUsername" placeholder="Enter username">
+
+            <label>Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter password">
+
+            <button type="submit">Login</button>
+            <p class="message" id="loginMessage"></p>
+        </form>
+    </section>
+
+    <!-- USER PROFILE FORM -->
+    <section class="form-card" id="profile">
+        <h2>User Profile</h2>
+
+        <form id="profileForm">
+            <label>Full Name</label>
+            <input type="text" id="profileName" placeholder="Enter full name">
+
+            <label>Email</label>
+            <input type="text" id="profileEmail" placeholder="Enter email">
+
+            <label>Mobile Number</label>
+            <input type="text" id="profileMobile" maxlength="10"
+                   placeholder="10-digit mobile number">
+
+            <label>Address</label>
+            <textarea id="profileAddress" rows="3"
+                      placeholder="Enter address"></textarea>
+
+            <button type="submit">Update Profile</button>
+            <p class="message" id="profileMessage"></p>
+        </form>
+    </section>
+
+    <!-- PAYMENT FORM -->
+    <section class="form-card" id="payment">
+        <h2>Payment Details</h2>
+        <p>Demonstration only. Do not enter real card details.</p>
+
+        <form id="paymentForm">
+            <label>Cardholder Name</label>
+            <input type="text" id="cardName" placeholder="Name on card">
+
+            <label>Card Number</label>
+            <input type="text" id="cardNumber" maxlength="16"
+                   placeholder="16-digit test number">
+
+            <label>Expiry Month and Year</label>
+            <input type="month" id="expiry">
+
+            <label>CVV</label>
+            <input type="password" id="cvv" maxlength="4"
+                   placeholder="3 or 4 digits">
+
+            <button type="submit">Validate Payment</button>
+            <p class="message" id="paymentMessage"></p>
+        </form>
+    </section>
+
+</div>
+
+<footer>
+    CVR BOOKSTORE | Web Technologies Lab
+</footer>
+
+<script>
+    // Display success or error messages
+    function showMessage(elementId, message, isSuccess) {
+        const element = document.getElementById(elementId);
+
+        element.textContent = message;
+        element.className = isSuccess
+            ? "message success"
+            : "message error";
+    }
+
+    // 1. REGISTRATION VALIDATION
+    document.getElementById("registrationForm")
+        .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        let name = document.getElementById("regName").value.trim();
+        let email = document.getElementById("regEmail").value.trim();
+        let mobile = document.getElementById("regMobile").value.trim();
+        let username = document.getElementById("regUsername").value.trim();
+        let password = document.getElementById("regPassword").value;
+        let confirm = document.getElementById("regConfirm").value;
+
+        if (name.length < 3) {
+            showMessage("regMessage", "Name must contain at least 3 characters.", false);
+        }
+        else if (!email.includes("@") || !email.includes(".")) {
+            showMessage("regMessage", "Enter a valid email address.", false);
+        }
+        else if (mobile.length != 10 || isNaN(mobile)) {
+            showMessage("regMessage", "Enter a 10-digit mobile number.", false);
+        }
+        else if (username.length < 4 || username.length > 15) {
+            showMessage("regMessage", "Username must contain 4 to 15 characters.", false);
+        }
+        else if (password.length < 8) {
+            showMessage("regMessage", "Password must contain at least 8 characters.", false);
+        }
+        else if (password != confirm) {
+            showMessage("regMessage", "Passwords do not match.", false);
+        }
+        else {
+            showMessage("regMessage", "Registration Successful!", true);
+        }
+    });
+
+    // 2. LOGIN VALIDATION
+    document.getElementById("loginForm")
+        .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        let username = document.getElementById("loginUsername").value.trim();
+        let password = document.getElementById("loginPassword").value;
+
+        if (username == "" || password == "") {
+            showMessage("loginMessage", "Enter username and password.", false);
+        }
+        else if (username.length < 4 || username.length > 15) {
+            showMessage("loginMessage", "Username must contain 4 to 15 characters.", false);
+        }
+        else if (password.length < 8) {
+            showMessage("loginMessage", "Password must contain at least 8 characters.", false);
+        }
+        else {
+            showMessage("loginMessage", "Login validation successful!", true);
+        }
+    });
+
+    // 3. PROFILE VALIDATION
+    document.getElementById("profileForm")
+        .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        let name = document.getElementById("profileName").value.trim();
+        let email = document.getElementById("profileEmail").value.trim();
+        let mobile = document.getElementById("profileMobile").value.trim();
+        let address = document.getElementById("profileAddress").value.trim();
+
+        if (name.length < 3) {
+            showMessage("profileMessage", "Name must contain at least 3 characters.", false);
+        }
+        else if (!email.includes("@") || !email.includes(".")) {
+            showMessage("profileMessage", "Enter a valid email address.", false);
+        }
+        else if (mobile.length != 10 || isNaN(mobile)) {
+            showMessage("profileMessage", "Enter a 10-digit mobile number.", false);
+        }
+        else if (address.length < 5) {
+            showMessage("profileMessage", "Enter a valid address.", false);
+        }
+        else {
+            showMessage("profileMessage", "Profile updated successfully!", true);
+        }
+    });
+
+    // 4. PAYMENT VALIDATION
+    document.getElementById("paymentForm")
+        .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        let name = document.getElementById("cardName").value.trim();
+        let number = document.getElementById("cardNumber").value.trim();
+        let expiry = document.getElementById("expiry").value;
+        let cvv = document.getElementById("cvv").value.trim();
+
+        if (name.length < 3) {
+            showMessage("paymentMessage", "Enter the cardholder name.", false);
+        }
+        else if (number.length != 16 || isNaN(number)) {
+            showMessage("paymentMessage", "Card number must contain 16 digits.", false);
+        }
+        else if (expiry == "") {
+            showMessage("paymentMessage", "Select the expiry date.", false);
+        }
+        else if (cvv.length < 3 || cvv.length > 4 || isNaN(cvv)) {
+            showMessage("paymentMessage", "CVV must contain 3 or 4 digits.", false);
+        }
+        else {
+            let today = new Date();
+            let selectedExpiry = new Date(expiry + "-01");
+            let currentMonth = new Date(
+                today.getFullYear(), today.getMonth(), 1
+            );
+
+            if (selectedExpiry < currentMonth) {
+                showMessage("paymentMessage", "Card has expired.", false);
+            }
+            else {
+                showMessage("paymentMessage", "Payment details validated successfully!", true);
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
