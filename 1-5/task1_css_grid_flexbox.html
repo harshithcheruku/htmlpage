@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CVR Bookstore | CSS Grid & Flexbox</title>
+  <style>
+    :root {
+      --sky: #a9def5;
+      --nav: #ffe4a3;
+      --green: #a9cc91;
+      --book-row: #e9e0a4;
+      --ink: #14212b;
+      --accent: #1646c8;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: #f4f7f8;
+    }
+    .site-header {
+      min-height: 142px;
+      background: var(--sky);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 14px 28px;
+      animation: slideDown .7s ease both;
+    }
+    .college-logo {
+      width: 118px;
+      height: 118px;
+      flex: 0 0 auto;
+      background: #fff;
+      border: 2px solid rgba(0,0,0,.12);
+      border-radius: 4px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 8px;
+      color: #124a75;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .college-logo span { display:block; font-size: 31px; margin-bottom: 5px; }
+    .brand { text-align: center; flex: 1; margin-right: 118px; }
+    .brand h1 { margin: 0 0 8px; font-size: clamp(1.4rem, 2.2vw, 2rem); }
+    .brand p { margin: 0; font-weight: 700; line-height: 1.35; }
+    .main-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      gap: 8px;
+      padding: 0 14px;
+      min-height: 42px;
+      background: var(--nav);
+      border-bottom: 1px solid #c5b27c;
+    }
+    .main-nav a {
+      color: #111;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: .88rem;
+      padding: 13px 18px;
+      border-radius: 5px;
+      transition: background .25s ease, transform .25s ease;
+    }
+    .main-nav a:hover { background: #fff2cc; transform: translateY(-2px); }
+    .page-layout {
+      display: grid;
+      grid-template-columns: 265px minmax(0, 1fr);
+      min-height: calc(100vh - 225px);
+    }
+    .departments {
+      background: var(--sky);
+      border: 1px solid #557b8b;
+      display: flex;
+      flex-direction: column;
+    }
+    .department-heading {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      text-align: center;
+      font-weight: 800;
+      background: #b9e7f8;
+      border-bottom: 1px solid #557b8b;
+    }
+    .department-heading span { padding: 9px 4px; }
+    .department-heading span:first-child { border-right: 1px solid #557b8b; }
+    .department-list { display: flex; flex-direction: column; flex: 1; }
+    .department {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      align-items: center;
+      text-align: center;
+      min-height: 70px;
+      border-bottom: 1px solid #557b8b;
+      font-weight: 800;
+    }
+    .department .number { padding: 20px 4px; border-right: 1px solid #557b8b; }
+    .department a { color: var(--accent); text-decoration: none; transition: color .2s; }
+    .department a:hover { color: #9b1bb2; }
+    .catalogue {
+      background: var(--green);
+      padding: 30px clamp(16px, 4vw, 56px);
+      overflow: hidden;
+    }
+    .catalogue h2 {
+      text-align: center;
+      font-size: clamp(1.35rem, 2vw, 1.75rem);
+      margin: 4px 0 32px;
+      animation: fadeIn .9s .15s both;
+    }
+    .table-wrap { overflow-x: auto; }
+    .book-table {
+      width: 100%;
+      min-width: 670px;
+      border-collapse: collapse;
+      background: var(--book-row);
+      box-shadow: 0 12px 25px rgba(35, 61, 31, .12);
+      animation: fadeInUp .8s .25s both;
+    }
+    .book-table th {
+      background: #f4f4f4;
+      padding: 20px 12px;
+      font-size: .9rem;
+    }
+    .book-table td {
+      padding: 14px 12px;
+      height: 122px;
+      text-align: center;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,.55);
+    }
+    .book-cover {
+      width: 65px;
+      height: 88px;
+      margin: auto;
+      padding: 7px 4px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: white;
+      text-align: center;
+      font-size: 8px;
+      font-weight: 800;
+      box-shadow: 2px 3px 5px #777;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .book-cover:hover { transform: scale(1.12) rotate(-2deg); box-shadow: 4px 7px 12px #777; }
+    .cover-one { background: linear-gradient(155deg, #9c3027, #f4a64c 55%, #4a241b); }
+    .cover-two { background: linear-gradient(155deg, #103d76, #30a9d1 60%, #172e54); }
+    .cover-three { background: linear-gradient(155deg, #e56c31, #fff 52%, #b72e20); color: #202020; }
+    .cover-four { background: linear-gradient(155deg, #c51e8a, #f36fbd 55%, #4a2375); }
+    .cover-five { background: linear-gradient(155deg, #1b6948, #9cd3a1 55%, #144332); }
+    .cover-band { background: rgba(0,0,0,.28); padding: 5px 2px; }
+    .price { white-space: nowrap; }
+    .add-btn {
+      border: 1px solid #777;
+      border-radius: 3px;
+      background: #f8f8f8;
+      padding: 7px 10px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background .25s, transform .25s;
+    }
+    .add-btn:hover { background: #fff1b8; transform: scale(1.06); }
+    .site-footer {
+      text-align: center;
+      background: #fff;
+      border-top: 1px solid #aaa;
+      padding: 10px;
+      font-size: .85rem;
+      font-weight: 800;
+    }
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      background: #173d27;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px #0003;
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: opacity .25s, transform .25s;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-18px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 800px) {
+      .site-header { flex-direction: column; gap: 10px; padding: 16px; }
+      .brand { margin-right: 0; }
+      .college-logo { width: 82px; height: 82px; }
+      .college-logo span { font-size: 24px; }
+      .main-nav { flex-wrap: wrap; padding: 5px; }
+      .main-nav a { padding: 10px 12px; }
+      .page-layout { grid-template-columns: 1fr; }
+      .departments { border-bottom: 0; }
+      .department-heading { grid-template-columns: 60px 1fr; }
+      .department-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .department { grid-template-columns: 45px 1fr; min-height: 58px; }
+      .department .number { padding: 15px 4px; }
+      .catalogue { padding: 24px 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="home">
+    <div class="college-logo" aria-label="College logo placeholder"><span>🎓</span>CVR COLLEGE<br>OF ENGINEERING</div>
+    <div class="brand">
+      <h1>CVR BOOKSTORE</h1>
+      <p>Vastunagar, Mangalpalli (V), Ibrahimpatnam (M),<br>Rangareddy (D), Telangana 501 510</p>
+    </div>
+  </header>
+
+  <nav class="main-nav" aria-label="Main navigation">
+    <a href="#home">HOME</a><a href="#login" onclick="demoLink(event, 'Login')">LOGIN</a>
+    <a href="#registration" onclick="demoLink(event, 'Registration')">REGISTRATION</a>
+    <a href="#catalogue">CATALOGUE</a><a href="#cart" onclick="showCart()">CART (<span id="cart-count">0</span>)</a>
+  </nav>
+
+  <div class="page-layout">
+    <aside class="departments" aria-label="Departments">
+      <div class="department-heading"><span>S.NO</span><span>DEPARTMENT</span></div>
+      <div class="department-list">
+        <div class="department"><span class="number">1.</span><a href="#catalogue">CSE</a></div>
+        <div class="department"><span class="number">2.</span><a href="#catalogue">ECE</a></div>
+        <div class="department"><span class="number">3.</span><a href="#catalogue">AIML</a></div>
+        <div class="department"><span class="number">4.</span><a href="#catalogue">EEE</a></div>
+        <div class="department"><span class="number">5.</span><a href="#catalogue">CIVIL</a></div>
+      </div>
+    </aside>
+
+    <main class="catalogue" id="catalogue">
+      <h2>BOOK CATALOGUE</h2>
+      <div class="table-wrap">
+        <table class="book-table">
+          <thead><tr><th>Department</th><th>Book Image</th><th>Book Name</th><th>Price</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td>CSE</td><td><div class="book-cover cover-one"><span>BASICS OF</span><span class="cover-band">COMPUTER<br>ENGINEERING</span><span>TEXTBOOK</span></div></td><td>BASICS OF COMPUTER ENGINEERING</td><td class="price">₹450</td><td><button class="add-btn" onclick="addToCart('Basics of Computer Engineering',450)">Add to Cart</button></td></tr>
+            <tr><td>CSE</td><td><div class="book-cover cover-two"><span>ENGINEERING</span><span class="cover-band">MATHEMATICS</span><span>VOLUME I</span></div></td><td>FUNDAMENTAL ENGINEERING MATHEMATICS</td><td class="price">₹550</td><td><button class="add-btn" onclick="addToCart('Fundamental Engineering Mathematics',550)">Add to Cart</button></td></tr>
+            <tr><td>ECE</td><td><div class="book-cover cover-three"><span>ANALOG</span><span class="cover-band">CIRCUITS</span><span>STUDENT EDITION</span></div></td><td>ANALOG CIRCUITS</td><td class="price">₹400</td><td><button class="add-btn" onclick="addToCart('Analog Circuits',400)">Add to Cart</button></td></tr>
+            <tr><td>ECE</td><td><div class="book-cover cover-four"><span>DIGITAL</span><span class="cover-band">ELECTRONICS</span><span>FUNDAMENTALS</span></div></td><td>DIGITAL ELECTRONICS</td><td class="price">₹500</td><td><button class="add-btn" onclick="addToCart('Digital Electronics',500)">Add to Cart</button></td></tr>
+            <tr><td>EEE</td><td><div class="book-cover cover-five"><span>ELECTRICAL</span><span class="cover-band">MACHINES</span><span>ENGINEERING</span></div></td><td>INTRODUCTION TO ELECTRICAL MACHINES</td><td class="price">₹620</td><td><button class="add-btn" onclick="addToCart('Introduction to Electrical Machines',620)">Add to Cart</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+  <footer class="site-footer">ROLL NO : 24B81A6742</footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+    let cart = [];
+    let toastTimer;
+    function notify(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+    function addToCart(name, price) {
+      cart.push({name, price});
+      document.getElementById('cart-count').textContent = cart.length;
+      notify(name + ' added to cart!');
+    }
+    function showCart() {
+      event.preventDefault();
+      if (!cart.length) return notify('Your cart is empty.');
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      notify('Cart: ' + cart.length + ' book(s) | Total ₹' + total);
+    }
+    function demoLink(e, section) { e.preventDefault(); notify(section + ' page is a demo link in this practical.'); }
+  </script>
+</body>
+</html>
